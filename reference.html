@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Feed Company Homepage Concept</title>
+  <style>
+    :root {
+      --bg: #f7f2e8;
+      --paper: #fffaf0;
+      --ink: #231f20;
+      --muted: #766f65;
+      --gold: #d9a441;
+      --gold-dark: #9b6b17;
+      --green: #496b35;
+      --green-dark: #24391d;
+      --line: rgba(35, 31, 32, 0.14);
+      --white: #ffffff;
+      --shadow: 0 24px 70px rgba(36, 57, 29, 0.16);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(217, 164, 65, 0.22), transparent 28%),
+        radial-gradient(circle at 95% 20%, rgba(73, 107, 53, 0.14), transparent 28%),
+        var(--bg);
+      color: var(--ink);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 24px auto;
+      background: var(--paper);
+      border: 1px solid rgba(35, 31, 32, 0.1);
+      border-radius: 34px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+
+    .navbar {
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 34px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 250, 240, 0.82);
+      backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+    }
+
+    .logo-mark {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid var(--green-dark);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #fff7df, #f1d18b);
+      box-shadow: inset 0 0 0 5px rgba(255,255,255,0.55);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .nav-links a { opacity: 0.74; transition: 0.25s ease; }
+    .nav-links a:hover { opacity: 1; color: var(--gold-dark); }
+
+    .contacts-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(35,31,32,0.16);
+      background: var(--ink);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .hamburger {
+      width: 18px;
+      display: grid;
+      gap: 4px;
+    }
+    .hamburger span {
+      display: block;
+      height: 2px;
+      border-radius: 2px;
+      background: currentColor;
+    }
+
+    .contact-panel {
+      position: absolute;
+      top: 92px;
+      right: 30px;
+      z-index: 30;
+      width: 280px;
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(35, 31, 32, 0.92);
+      color: white;
+      box-shadow: 0 22px 60px rgba(0,0,0,0.25);
+      transform: translateY(-8px);
+      opacity: 0;
+      pointer-events: none;
+      transition: 0.25s ease;
+    }
+
+    .contact-panel.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .contact-panel h4 { margin: 0 0 12px; font-size: 16px; }
+    .contact-panel p { margin: 8px 0; color: rgba(255,255,255,0.78); font-size: 14px; }
+
+    .hero {
+      min-height: 590px;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      position: relative;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 64%;
+      height: 125%;
+      left: -17%;
+      top: -20%;
+      border-radius: 50%;
+      background:
+        linear-gradient(135deg, rgba(73,107,53,0.9), rgba(36,57,29,0.96)),
+        url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?auto=format&fit=crop&w=1200&q=80');
+      background-size: cover;
+      background-blend-mode: multiply;
+      box-shadow: inset -18px 0 0 rgba(255,250,240,0.9);
+      z-index: 0;
+    }
+
+    .hero-left, .hero-right {
+      position: relative;
+      z-index: 1;
+      padding: 70px 48px;
+    }
+
+    .hero-left {
+      display: flex;
+      align-items: flex-end;
+      color: white;
+    }
+
+    .slide-card {
+      max-width: 380px;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(14px);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .slide-card h1 {
+      margin: 0;
+      font-size: clamp(42px, 6vw, 82px);
+      line-height: 0.88;
+      letter-spacing: -0.075em;
+    }
+
+    .slide-card p {
+      color: rgba(255,255,255,0.82);
+      line-height: 1.7;
+      margin: 18px 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      background: var(--gold);
+      color: #261c07;
+      font-weight: 900;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 14px 34px rgba(217, 164, 65, 0.28);
+    }
+
+    .dots { display: flex; gap: 9px; margin-top: 26px; }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+    }
+    .dot.active { width: 30px; border-radius: 999px; background: var(--gold); }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 90px;
+    }
+
+    .hero-right h2 {
+      margin: 0;
+      font-size: clamp(48px, 6vw, 86px);
+      line-height: 0.9;
+      letter-spacing: -0.08em;
+    }
+
+    .tagline {
+      margin: 18px 0 28px;
+      color: var(--green);
+      font-size: 22px;
+      font-weight: 800;
+      max-width: 380px;
+    }
+
+    .pill { display: inline-flex; align-self: flex-start; padding: 8px 12px; border-radius: 999px; background: rgba(217,164,65,0.2); color: var(--gold-dark); font-weight: 900; font-size: 12px; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 14px; }
+
+    .product-list {
+      display: grid;
+      gap: 14px;
+      max-width: 360px;
+    }
+
+    .product-item {
+      border: 1px solid rgba(35,31,32,0.12);
+      border-radius: 22px;
+      padding: 18px 22px;
+      background: rgba(255,255,255,0.56);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: 0.3s ease;
+      font-size: 24px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      cursor: pointer;
+    }
+
+    .product-item:not(.selected) { opacity: 0.42; transform: scale(0.98); }
+    .product-item.selected { background: var(--ink); color: white; box-shadow: 0 18px 40px rgba(35,31,32,0.2); }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      background: #fff6df;
+      border-bottom: 1px solid var(--line);
+      border-top: 1px solid var(--line);
+    }
+
+    .stat {
+      min-height: 108px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      border-right: 1px solid var(--line);
+    }
+    .stat:last-child { border-right: 0; }
+    .stat-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--green-dark);
+      color: white;
+      font-size: 18px;
+    }
+    .stat strong { display: block; font-size: 28px; letter-spacing: -0.05em; }
+    .stat span { color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    .about {
+      min-height: 470px;
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .about::before {
+      content: "";
+      position: absolute;
+      left: 36%;
+      top: -12%;
+      width: 280px;
+      height: 125%;
+      border-radius: 50%;
+      background: var(--paper);
+      box-shadow: -22px 0 0 rgba(217,164,65,0.18);
+      z-index: 2;
+    }
+
+    .about-image {
+      background:
+        linear-gradient(0deg, rgba(36,57,29,0.25), rgba(36,57,29,0.25)),
+        url('https://images.unsplash.com/photo-1589923188900-85dae523342b?auto=format&fit=crop&w=1100&q=80');
+      background-size: cover;
+      background-position: center;
+      min-height: 470px;
+    }
+
+    .about-content {
+      position: relative;
+      z-index: 3;
+      padding: 74px 70px 74px 115px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .section-kicker { color: var(--gold-dark); font-weight: 950; text-transform: uppercase; letter-spacing: 0.14em; font-size: 12px; margin: 0 0 14px; }
+    .section-title { margin: 0 0 18px; font-size: clamp(36px, 4vw, 62px); line-height: 0.95; letter-spacing: -0.07em; }
+    .body-text { color: #5d564d; line-height: 1.9; font-size: 16px; margin: 0; max-width: 650px; }
+
+    .mission-vision {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 285px;
+      border-bottom: 1px solid var(--line);
+      overflow: hidden;
+      background: #fbefd3;
+    }
+
+    .mission-vision::before,
+    .mission-vision::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 230px;
+      height: 230px;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      background: var(--paper);
+      border: 1px solid var(--line);
+    }
+    .mission-vision::before { left: -150px; }
+    .mission-vision::after { right: -150px; }
+
+    .mv-card {
+      padding: 64px 70px;
+      position: relative;
+      z-index: 1;
+    }
+    .mv-card:first-child { border-right: 1px solid var(--line); }
+    .mv-card h3 { margin: 0 0 14px; font-size: 34px; letter-spacing: -0.055em; }
+    .mv-card p { margin: 0; color: #645c52; line-height: 1.75; }
+
+    .values {
+      padding: 72px 70px 84px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .values-title {
+      display: table;
+      margin: 0 auto 48px;
+      padding: 10px 22px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: white;
+      font-weight: 950;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--green-dark);
+    }
+    .value-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 34px 66px;
+    }
+    .value-item {
+      display: grid;
+      grid-template-columns: 58px 1fr;
+      gap: 18px;
+      align-items: flex-start;
+    }
+    .value-no {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: 2px solid var(--green-dark);
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      font-weight: 950;
+      background: #fff6df;
+    }
+    .value-item h4 { margin: 0 0 8px; font-size: 20px; letter-spacing: -0.04em; }
+    .value-item p { margin: 0; color: var(--muted); line-height: 1.65; }
+
+    .footer {
+      display: grid;
+      grid-template-columns: 1fr 0.8fr 1.1fr;
+      gap: 40px;
+      padding: 58px 52px;
+      background: var(--green-dark);
+      color: white;
+    }
+    .footer p, .footer a { color: rgba(255,255,255,0.72); line-height: 1.75; }
+    .footer h4 { margin: 0 0 16px; font-size: 18px; }
+    .footer-links { display: grid; gap: 10px; }
+    .map {
+      min-height: 150px;
+      border-radius: 22px;
+      background:
+        linear-gradient(135deg, rgba(217,164,65,0.8), rgba(255,255,255,0.16)),
+        repeating-linear-gradient(45deg, rgba(255,255,255,0.18) 0 2px, transparent 2px 16px);
+      border: 1px solid rgba(255,255,255,0.18);
+      display: grid;
+      place-items: center;
+      font-weight: 950;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+    }
+
+    @media (max-width: 900px) {
+      .page { width: 100%; margin: 0; border-radius: 0; }
+      .navbar { padding: 0 18px; }
+      .nav-links { display: none; }
+      .hero, .about, .mission-vision, .footer, .value-grid { grid-template-columns: 1fr; }
+      .hero::before { width: 120%; height: 52%; left: -10%; top: 0; border-radius: 0 0 50% 50%; }
+      .hero-left, .hero-right { padding: 48px 24px; }
+      .hero-left { min-height: 450px; align-items: center; }
+      .hero-right { padding-left: 24px; }
+      .stats { grid-template-columns: 1fr 1fr; }
+      .stat { border-bottom: 1px solid var(--line); }
+      .about::before { display: none; }
+      .about-content { padding: 46px 24px; }
+      .mv-card { padding: 42px 24px; }
+      .mv-card:first-child { border-right: 0; border-bottom: 1px solid var(--line); }
+      .values { padding: 48px 24px; }
+      .footer { padding: 42px 24px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="navbar">
+      <a href="#" class="logo">
+        <span class="logo-mark">FD</span>
+        <span>FarmFeed</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#about">About Us</a>
+        <a href="#products">Products</a>
+        <a href="#career">Career</a>
+        <a href="#depots">Depot</a>
+      </div>
+
+      <button class="contacts-toggle" id="contactToggle" type="button">
+        Contacts
+        <span class="hamburger"><span></span><span></span><span></span></span>
+      </button>
+    </nav>
+
+    <aside class="contact-panel" id="contactPanel">
+      <h4>Contact Us</h4>
+      <p><strong>Phone:</strong> +265 999 000 000</p>
+      <p><strong>Email:</strong> sales@farmfeed.mw</p>
+      <p><strong>Location:</strong> Main depot, Malawi</p>
+    </aside>
+
+    <section class="hero" id="products">
+      <div class="hero-left">
+        <div class="slide-card">
+          <p class="eyebrow">Chicken Feed</p>
+          <h1>Layer 106</h1>
+          <p>Premium pullet concentrate and balanced feed for healthier birds, stronger production, and better farmer returns.</p>
+          <button class="btn">Order Now →</button>
+          <div class="dots"><span class="dot active"></span><span class="dot"></span><span class="dot"></span></div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <span class="pill">Products</span>
+        <h2>Our Range</h2>
+        <p class="tagline">Feed that grows the nation.</p>
+        <div class="product-list">
+          <div class="product-item selected"><span>Chicken Feed</span><span>→</span></div>
+          <div class="product-item"><span>Fish Feed</span><span>→</span></div>
+          <div class="product-item"><span>Dog Food</span><span>→</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="stats" aria-label="Impact at a glance">
+      <div class="stat"><span class="stat-icon">♘</span><div><strong>+600</strong><span>Farmers Served</span></div></div>
+      <div class="stat"><span class="stat-icon">★</span><div><strong>+700</strong><span>Happy Customers</span></div></div>
+      <div class="stat"><span class="stat-icon">●</span><div><strong>+300</strong><span>Daily Orders</span></div></div>
+      <div class="stat"><span class="stat-icon">✚</span><div><strong>+500</strong><span>Product Bags</span></div></div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-image" aria-label="Farm feed image"></div>
+      <div class="about-content">
+        <p class="section-kicker">About Us</p>
+        <h2 class="section-title">Reliable feed for stronger farms.</h2>
+        <p class="body-text">We provide quality animal feed products designed to support farmers, households, and businesses. Our focus is on consistent nutrition, accessible supply, and dependable service through our product range and depot network.</p>
+      </div>
+    </section>
+
+    <section class="mission-vision">
+      <div class="mv-card">
+        <h3>Our Vision</h3>
+        <p>To become the most trusted animal feed partner for farmers and communities across the country.</p>
+      </div>
+      <div class="mv-card">
+        <h3>Our Mission</h3>
+        <p>To produce and distribute affordable, high-quality feed that improves productivity and supports national food security.</p>
+      </div>
+    </section>
+
+    <section class="values">
+      <h3 class="values-title">Our Values</h3>
+      <div class="value-grid">
+        <article class="value-item"><span class="value-no">1</span><div><h4>Quality</h4><p>Every product is made to support healthy growth, strong output, and customer confidence.</p></div></article>
+        <article class="value-item"><span class="value-no">3</span><div><h4>Reliability</h4><p>We aim to be available when farmers need us through steady supply and clear communication.</p></div></article>
+        <article class="value-item"><span class="value-no">2</span><div><h4>Care</h4><p>We care about the animals, farmers, families, and businesses that depend on our feed.</p></div></article>
+        <article class="value-item"><span class="value-no">4</span><div><h4>Growth</h4><p>We support growth from small farms to larger operations through practical feed solutions.</p></div></article>
+      </div>
+    </section>
+
+    <footer class="footer" id="depots">
+      <div>
+        <a href="#" class="logo"><span class="logo-mark">FD</span><span>FarmFeed</span></a>
+        <p>Quality animal feed products for poultry, fish, dogs, and growing farms.</p>
+      </div>
+      <div>
+        <h4>Quick Links</h4>
+        <div class="footer-links">
+          <a href="#">Home</a>
+          <a href="#about">About Us</a>
+          <a href="#products">Products</a>
+          <a href="#depots">Our Depots</a>
+        </div>
+      </div>
+      <div>
+        <h4>Our Depots</h4>
+        <div class="map">Map</div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    const toggle = document.getElementById('contactToggle');
+    const panel = document.getElementById('contactPanel');
+    toggle.addEventListener('click', () => panel.classList.toggle('open'));
+
+    const products = document.querySelectorAll('.product-item');
+    products.forEach((item) => {
+      item.addEventListener('click', () => {
+        products.forEach((p) => p.classList.remove('selected'));
+        item.classList.add('selected');
+      });
+    });
+  </script>
+</body>
+</html>
