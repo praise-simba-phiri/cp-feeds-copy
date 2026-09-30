@@ -36,30 +36,33 @@ export function ValuesGrid() {
     <section
       id="values"
       ref={ref}
-      className="relative border-b border-[var(--line)] bg-[var(--paper)] px-5 pb-[84px] pt-[72px] sm:px-8 lg:px-[70px]"
+      className="relative bg-white px-5 py-[88px] sm:px-8 lg:px-12"
     >
-      <h3 className="mx-auto mb-12 table rounded-full border border-[var(--line)] bg-white px-[22px] py-2.5 text-center font-black uppercase tracking-[0.12em] text-[var(--green-dark)]">
-        Our Values
-      </h3>
+      <div className="mx-auto mb-12 flex w-fit flex-col items-center gap-3">
+        <span className="inline-flex items-center gap-2 rounded-full bg-[var(--red)]/10 px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[var(--red)]">
+          Our Values
+        </span>
+        <h3 className="m-0 font-display text-[clamp(2rem,3.6vw,3rem)] font-black leading-[1] tracking-[-0.05em] text-[var(--indigo-ink)]">
+          What we stand for.
+        </h3>
+      </div>
 
-      <div className="grid gap-x-[66px] gap-y-[34px] md:grid-cols-2">
+      <div className="grid gap-x-10 gap-y-10 md:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
         {coreValues.map((value) => (
           <article
             key={value.title}
             data-value
-            className="grid grid-cols-[58px_1fr] items-start gap-[18px]"
+            className="group relative rounded-[22px] border border-[var(--line)] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--indigo)] hover:shadow-[0_24px_48px_-20px_rgba(42,27,140,0.35)]"
           >
-            <span className="grid h-[52px] w-[52px] place-items-center rounded-full border-2 border-[var(--green-dark)] bg-[var(--paper-warm)] font-black text-[22px] text-[var(--ink)]">
+            <span className="absolute -top-5 left-6 grid h-12 w-12 place-items-center rounded-full bg-[var(--indigo)] font-black text-[18px] text-white shadow-[0_10px_24px_-10px_rgba(42,27,140,0.55)] transition-colors group-hover:bg-[var(--red)]">
               {parseInt(value.number, 10)}
             </span>
-            <div>
-              <h4 className="m-0 mb-2 text-[20px] font-black tracking-[-0.04em] text-[var(--ink)]">
-                {value.title}
-              </h4>
-              <p className="m-0 leading-[1.65] text-[var(--muted)]">
-                {value.description}
-              </p>
-            </div>
+            <h4 className="m-0 mb-2 mt-6 font-display text-[22px] font-black tracking-[-0.03em] text-[var(--indigo-ink)]">
+              {value.title}
+            </h4>
+            <p className="m-0 text-[14px] leading-[1.7] text-[var(--muted-strong)]">
+              {value.description}
+            </p>
           </article>
         ))}
       </div>

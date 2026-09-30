@@ -2,17 +2,17 @@ export const brandName = "CP Feeds";
 
 export const navigationLinks = [
   { label: "Home", href: "#home" },
-  { label: "About", href: "#about" },
-  { label: "Products", href: "#products" },
-  { label: "Values", href: "#values" },
-  { label: "Depot", href: "#depot" },
+  { label: "About Us", href: "#about" },
+  { label: "CSR", href: "#csr" },
+  { label: "Careers", href: "#careers" },
 ] as const;
 
 export const brandColors = {
-  ink: "#0f1729",
-  accent: "#d7292d",
-  gold: "#c69148",
-  paper: "#faf7f0",
+  ink: "#0f0a2b",
+  indigo: "#2a1b8c",
+  indigoDark: "#1c1066",
+  red: "#dc1b22",
+  paper: "#ffffff",
 } as const;
 
 export const contactInfo = {
@@ -20,3 +20,4 @@ export const contactInfo = {
   email: "sales@capsmw.com",
   address: "Dudu Estates, Lilongwe, Malawi",
 } as const;
+

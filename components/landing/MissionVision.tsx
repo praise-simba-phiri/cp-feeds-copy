@@ -4,10 +4,13 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Check, Compass, Target } from "lucide-react";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
 }
+
+
 
 export function MissionVision() {
   const ref = useRef<HTMLElement>(null);
@@ -35,45 +38,59 @@ export function MissionVision() {
     <section
       ref={ref}
       aria-label="Vision and mission"
-      className="relative min-h-[285px] overflow-hidden border-b border-[var(--line)] bg-[var(--paper-strong)]"
+      className="relative overflow-hidden bg-[var(--indigo-ink)] text-white"
     >
-      {/* Cream cutout circles — pushed further off so they don't overlap headings */}
       <div
         aria-hidden
-        className="absolute top-1/2 hidden h-[200px] w-[200px] -translate-y-1/2 rounded-full border border-[var(--line)] bg-[var(--paper)] md:block"
-        style={{ left: "-170px" }}
+        className="pointer-events-none absolute top-1/2 hidden h-[140%] w-[420px] -translate-y-1/2 rounded-[50%] bg-[var(--indigo)] opacity-45 md:block"
+        style={{ left: "-260px" }}
       />
       <div
         aria-hidden
-        className="absolute top-1/2 hidden h-[200px] w-[200px] -translate-y-1/2 rounded-full border border-[var(--line)] bg-[var(--paper)] md:block"
-        style={{ right: "-170px" }}
+        className="pointer-events-none absolute top-1/2 hidden h-[140%] w-[420px] -translate-y-1/2 rounded-[50%] bg-[var(--red)] opacity-18 md:block"
+        style={{ right: "-260px" }}
       />
 
-      <div className="relative grid md:grid-cols-2">
-        <div
-          data-mv
-          className="relative z-10 border-b border-[var(--line)] px-5 py-12 sm:px-8 md:border-b-0 md:border-r md:border-[var(--line)] md:py-16 md:pl-[80px] md:pr-[60px] lg:pl-[100px]"
-        >
-          <h3 className="m-0 mb-3.5 text-[32px] font-black leading-tight tracking-[-0.05em] text-[var(--ink)]">
+      <div className="relative grid gap-12 px-5 py-16 sm:px-8 md:grid-cols-2 md:gap-0 md:px-12 md:py-[88px] lg:px-16">
+        <div data-mv className="relative md:pr-10 lg:pr-16">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-[var(--red)] text-white shadow-[0_12px_28px_-12px_rgba(220,27,34,0.55)]">
+              <Compass className="h-5 w-5" />
+            </span>
+            <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-[var(--red-soft)]">
+              Where we&rsquo;re heading
+            </span>
+          </div>
+          <h3 className="m-0 mb-4 mt-5 font-display text-[clamp(2rem,3.4vw,2.75rem)] font-black leading-[1] tracking-[-0.04em]">
             Our Vision
           </h3>
-          <p className="m-0 max-w-md leading-[1.75] text-[#645c52]">
+          <p className="m-0 text-[16px] leading-[1.8] text-white/80">
             To become the most trusted animal feed partner for farmers and
             communities across the country.
           </p>
+          
         </div>
 
         <div
           data-mv
-          className="relative z-10 px-5 py-12 sm:px-8 md:py-16 md:pl-[60px] md:pr-[80px] lg:pr-[100px]"
+          className="relative md:border-l md:border-white/15 md:pl-10 lg:pl-16"
         >
-          <h3 className="m-0 mb-3.5 text-[32px] font-black leading-tight tracking-[-0.05em] text-[var(--ink)]">
+          <div className="flex items-center gap-3">
+            <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white text-[var(--indigo)] shadow-[0_12px_28px_-12px_rgba(255,255,255,0.35)]">
+              <Target className="h-5 w-5" />
+            </span>
+            <span className="text-[11px] font-extrabold uppercase tracking-[0.2em] text-white/70">
+              How we get there
+            </span>
+          </div>
+          <h3 className="m-0 mb-4 mt-5 font-display text-[clamp(2rem,3.4vw,2.75rem)] font-black leading-[1] tracking-[-0.04em]">
             Our Mission
           </h3>
-          <p className="m-0 max-w-md leading-[1.75] text-[#645c52]">
-            To produce and distribute affordable, high-quality feed that improves
-            productivity and supports national food security.
+          <p className="m-0 text-[16px] leading-[1.8] text-white/80">
+            To produce and distribute affordable, high-quality feed that
+            improves productivity and supports national food security.
           </p>
+          
         </div>
       </div>
     </section>

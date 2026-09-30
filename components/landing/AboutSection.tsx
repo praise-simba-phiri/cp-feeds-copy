@@ -47,54 +47,70 @@ export function AboutSection() {
     <section
       id="about"
       ref={ref}
-      className="relative overflow-hidden border-b border-[var(--line)] bg-[var(--paper)]"
+      className="relative overflow-hidden bg-white"
     >
-      <div className="relative">
-        <div className="relative grid items-stretch lg:grid-cols-[0.95fr_1.05fr]">
-          <div className="relative min-h-[360px] lg:min-h-[470px]">
-            <Image
-              data-about-image
-              src={aboutImage}
-              alt="CP Feeds farm operations"
-              fill
-              sizes="(max-width: 1024px) 100vw, 45vw"
-              className="object-cover"
-            />
-            <div
-              aria-hidden
-              className="absolute inset-0 bg-[linear-gradient(0deg,rgba(36,57,29,0.25),rgba(36,57,29,0.25))]"
-            />
-          </div>
-
+      <div className="grid items-stretch gap-10 px-5 py-16 sm:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:px-12 lg:py-[96px]">
+        <div className="relative min-h-[360px] overflow-hidden rounded-[28px] lg:min-h-[480px]">
+          <Image
+            data-about-image
+            src={aboutImage}
+            alt="CP Feeds farm operations"
+            fill
+            sizes="(max-width: 1024px) 100vw, 45vw"
+            className="object-cover"
+          />
           <div
             aria-hidden
-            className="absolute top-[-12%] hidden h-[125%] w-[280px] rounded-[50%] bg-[var(--paper)] shadow-[-22px_0_0_rgba(217,164,65,0.18)] lg:block"
-            style={{ left: "36%" }}
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgba(15,10,43,0.15),rgba(42,27,140,0.45))]"
           />
+          <span className="absolute bottom-5 left-5 inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[var(--indigo)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-[var(--red)]" />
+            Made in Malawi
+          </span>
+        </div>
 
-          <div className="relative z-[3] flex flex-col justify-center px-5 py-14 sm:px-8 lg:px-[70px] lg:py-[74px] lg:pl-[115px]">
-            <p
-              data-about-anim
-              className="m-0 mb-3.5 text-[12px] font-black uppercase tracking-[0.14em] text-[var(--gold-dark)]"
-            >
-              About Us
-            </p>
-            <h2
-              data-about-anim
-              className="m-0 mb-[18px] text-[clamp(2rem,4vw,3.5rem)] font-black leading-[0.95] tracking-[-0.06em] text-[var(--ink)]"
-              style={{ wordSpacing: "0.04em" }}
-            >
-              Reliable feed for stronger farms.
-            </h2>
-            <p
-              data-about-anim
-              className="m-0 max-w-[600px] text-[16px] leading-[1.9] text-[#5d564d]"
-            >
-              CP Feeds manufactures dependable poultry and cattle feed designed to
-              support farmers, households, and businesses across Malawi. Our focus is
-              on consistent nutrition, accessible supply, and dependable service
-              through our product range and depot network.
-            </p>
+        <div className="relative z-[3] flex flex-col justify-center">
+          <p
+            data-about-anim
+            className="m-0 mb-3.5 inline-flex w-fit items-center gap-2 rounded-full bg-[var(--red)]/10 px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[var(--red)]"
+          >
+            About Us
+          </p>
+          <h2
+            data-about-anim
+            className="m-0 mb-[18px] font-display text-[clamp(2.2rem,4vw,3.6rem)] font-black leading-[0.96] tracking-[-0.05em] text-[var(--indigo-ink)]"
+          >
+            Reliable feed for stronger farms.
+          </h2>
+          <p
+            data-about-anim
+            className="m-0 max-w-[560px] text-[16px] leading-[1.85] text-[var(--muted-strong)]"
+          >
+            CP Feeds manufactures dependable poultry and cattle feed designed to
+            support farmers, households, and businesses across Malawi. Our focus
+            is on consistent nutrition, accessible supply, and dependable
+            service through our product range and depot network.
+          </p>
+
+          <div data-about-anim className="mt-8 grid max-w-[560px] gap-3 sm:grid-cols-2">
+            {[
+              { k: "Stage-matched", v: "Programs by life-cycle" },
+              { k: "Direct support", v: "Sales team on the ground" },
+              { k: "National reach", v: "Depots in all 3 regions" },
+              { k: "Trusted formula", v: "Built for Malawian farms" },
+            ].map((f) => (
+              <div
+                key={f.k}
+                className="rounded-2xl border border-[var(--line)] bg-white p-4"
+              >
+                <p className="m-0 text-[11px] font-extrabold uppercase tracking-[0.14em] text-[var(--indigo)]">
+                  {f.k}
+                </p>
+                <p className="m-0 mt-1 text-[14px] font-bold text-[var(--ink)]">
+                  {f.v}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
